@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pitboard Support & Manual</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    max-width: 700px;
+    margin: auto;
+    padding: 16px;
+    background-color: #f7f7f7;
+    color: #111;
+  }
+  h1, h2 {
+    color: #007aff;
+    font-weight: 600;
+  }
+  h1 {
+    margin-bottom: 0.2em;
+  }
+  p, li {
+    line-height: 1.5;
+  }
+  ul {
+    padding-left: 1.2em;
+  }
+  .tile-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .tile {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  }
+  .tile-icon {
+    font-size: 40px;
+    color: #007aff;
+    margin-bottom: 8px;
+  }
+  .caption {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 8px;
+    background-color: #e6f0ff;
+    border-radius: 8px;
+    margin-bottom: 4px;
+  }
+  details summary:hover {
+    background-color: #cce0ff;
+  }
+  details[open] summary {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  details > p {
+    margin: 8px 16px;
+    color: #333;
+  }
+  footer {
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: #888;
+    text-align: center;
+  }
+  a {
+    color: #007aff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<h1>Pitboard App Manual & Support</h1>
+<p>App Version: <!-- You can update this manually when you update the site --></p>
+
+<h2>How to Use Pitboard</h2>
+<p>This guide will help you get started quickly and effectively with Pitboard.</p>
+
+<div class="tile-container">
+  <div class="tile">
+    <div class="tile-icon">📱</div>
+    <h3>1. Mount Your Phone</h3>
+    <p class="caption">Use a sturdy, anti-shake metal or alloy phone holder mounted in landscape mode on your handlebars, centered on the bar pad.</p>
+  </div>
+  <div class="tile">
+    <div class="tile-icon">▶️</div>
+    <h3>2. Start Session</h3>
+    <p class="caption">Tap Start Session, wait for GPS lock, and ride! No further setup needed. A rolling start is recommended.</p>
+  </div>
+  <div class="tile">
+    <div class="tile-icon">⏱️</div>
+    <h3>3. Monitor Your Ride</h3>
+    <p class="caption">Track lap time, corner time, straight time, and more with live on-screen metrics.</p>
+  </div>
+  <div class="tile">
+    <div class="tile-icon">⏹️</div>
+    <h3>4. Stop Session</h3>
+    <p class="caption">Tap Stop Session when you're done. Your ride will be saved automatically for review.</p>
+  </div>
+  <div class="tile">
+    <div class="tile-icon">📊</div>
+    <h3>5. Analyze Your Ride</h3>
+    <p class="caption">Review saved sessions to see lap times, metrics, and track your performance.</p>
+  </div>
+  <div class="tile">
+    <div class="tile-icon">⚡</div>
+    <h3>6. Get Faster!</h3>
+    <p class="caption">Use insights and data to improve your technique and reduce lap times over time.</p>
+  </div>
+</div>
+
+<h2>Frequently Asked Questions (FAQ)</h2>
+
+<details>
+  <summary>What does Pitboard do?</summary>
+  <p>Track your lap times, analyze corner and straight performance, and improve your riding with detailed metrics. Use session history to pinpoint areas for improvement.</p>
+</details>
+
+<details>
+  <summary>Do I need special equipment to use the app?</summary>
+  <p>A sturdy phone mount is essential. We recommend an anti-shake alloy or metal handlebar holder. Mounting on yourself may reduce data accuracy.</p>
+</details>
+
+<details>
+  <summary>Can I place my phone on myself instead of the bike?</summary>
+  <p>The phone needs to calibrate to the bike's lean axis, so mounting on the handlebars is best. Using a moon bag or tripper may cause inaccurate data.</p>
+</details>
+
+<details>
+  <summary>What metrics are tracked?</summary>
+  <ul>
+    <li>Total ride time</li>
+    <li>Number of laps</li>
+    <li>Current lap time</li>
+    <li>Corner time</li>
+    <li>Straight time</li>
+    <li>Average lap time</li>
+    <li>Average corner and straight times</li>
+  </ul>
+</details>
+
+<details>
+  <summary>How do I use Pitboard's data to get faster?</summary>
+  <p>Try to keep your current lap times at or below your average lap times to improve performance. Use the session history to monitor progress.</p>
+</details>
+
+<details>
+  <summary>Does the app require internet?</summary>
+  <p>No, it uses your phone’s GPS and sensors. No internet connection is needed during sessions.</p>
+</details>
+
+<details>
+  <summary>How accurate is GPS tracking?</summary>
+  <p>Accuracy depends on signal strength and device quality. Ensure a clear sky view and wait for GPS lock before starting.</p>
+</details>
+
+<details>
+  <summary>Why aren't my laps logging?</summary>
+  <p>Poor GPS signal can affect lap detection. Make sure you have a strong GPS signal (green icon) and wait for GPS lock.</p>
+</details>
+
+<details>
+  <summary>Can I review previous sessions?</summary>
+  <p>Yes, all sessions are stored locally for review in the Session History tab.</p>
+</details>
+
+<details>
+  <summary>What happens if I fall mid-ride?</summary>
+  <p>The timers keep running. Fall detection is planned for future updates.</p>
+</details>
+
+<details>
+  <summary>Can I export or share my data?</summary>
+  <p>This feature is coming soon.</p>
+</details>
+
+<details>
+  <summary>Can I name my sessions?</summary>
+  <p>Yes, you can rename sessions after recording for easy identification.</p>
+</details>
+
+<details>
+  <summary>Does the app work on all tracks?</summary>
+  <p>Yes, on any outdoor lap-based track with GPS coverage.</p>
+</details>
+
+<details>
+  <summary>How is a new lap detected?</summary>
+  <p>The app uses your start position and detects when you cross a 10-meter radius around it to log laps.</p>
+</details>
+
+<details>
+  <summary>Can I use the app for enduro or trail riding?</summary>
+  <p>Yes, the app works best on closed-loop, lap-based tracks.</p>
+</details>
+
+<details>
+  <summary>Why is the app prematurely logging laps?</summary>
+  <p>Your track may be too tight. The lap detection radius is 10 meters; tight corners can cause early lap logs.</p>
+</details>
+
+<footer>
+  <p>We are still developing and fixing bugs. Please <a href="mailto:ke-walden@outlook.com">contact us</a> with feedback or issues.</p>
+  <p><a href="https://yourdomain.com/privacy">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>
