@@ -5,26 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Pitboard Support & Manual</title>
 <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+  }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    max-width: 700px;
-    margin: auto;
-    padding: 0;
-    background-color: #fff;
+    background: #fff;
     color: #111;
+    width: 100vw;
+    max-width: 100vw;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+  }
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 18px;
+    box-sizing: border-box;
   }
   .menu-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111;
-    color: #fff;
-    padding: 0 24px;
+    background: #fff;
+    color: #111;
+    padding: 0 18px;
     height: 60px;
-    border-radius: 0 0 16px 16px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.06);
+    width: 100vw;
+    border-radius: 0;
+    margin-bottom: 0;
+    box-shadow: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   .menu-logo {
     display: flex;
@@ -40,31 +60,129 @@
     gap: 24px;
   }
   .menu-links a {
-    color: #fff;
+    color: #007aff;
     text-decoration: none;
     font-weight: 500;
     font-size: 1rem;
     transition: color 0.2s;
   }
   .menu-links a:hover {
+    color: #005bb5;
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    margin-left: 12px;
+  }
+  .hamburger span {
+    height: 4px;
+    width: 100%;
+    background: #007aff;
+    margin: 4px 0;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+  @media (max-width: 800px) {
+    .container {
+      padding: 0 8px;
+    }
+    .menu-links {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: #fff;
+      flex-direction: column;
+      width: 180px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
+      border-radius: 0 0 12px 12px;
+      z-index: 99;
+    }
+    .menu-links.open {
+      display: flex;
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+  .hero-banner-image {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: #f7f7f7;
+  }
+  .hero-banner-image img {
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    margin: 0 auto;
+  }
+  h1, h2, h3 {
     color: #007aff;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+  h1 {
+    margin-top: 24px;
+    font-size: 2.2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.1rem;
+  }
+  .tile-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin: 32px 0 32px 0;
+    width: 100%;
   }
   .tile {
     background: #f3f4f6;
     border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    padding: 18px 14px;
+    box-shadow: none;
+    margin: 0;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .tile-icon {
+    font-size: 40px;
+    color: #007aff;
+    margin-bottom: 8px;
+  }
+  .caption {
+    font-size: 0.95rem;
+    color: #555;
+  }
+  .faq-section {
+    margin: 32px 0;
+    width: 100%;
   }
   .faq-search-bar {
     width: 100%;
-    max-width: 400px;
-    margin: 0 auto 18px auto;
+    max-width: none;
+    margin: 0 0 18px 0;
     display: flex;
     align-items: center;
     background: #f3f4f6;
     border-radius: 8px;
     border: 1px solid #e0e0e0;
     padding: 6px 12px;
+    box-sizing: border-box;
   }
   .faq-search-bar input {
     border: none;
@@ -78,17 +196,76 @@
   .faq-search-bar input::placeholder {
     color: #888;
   }
+  .faq-accordion {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    background: #f7f7f7;
+    border: 1px solid #e0e0e0;
+  }
+  .faq-accordion summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 16px 18px;
+    background: #e6f0ff;
+    color: #007aff;
+    border-bottom: 1px solid #e0e0e0;
+    outline: none;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+  }
+  .faq-accordion[open] summary {
+    background: #d0e7ff;
+  }
+  .faq-accordion > *:not(summary) {
+    padding: 12px 18px 18px 18px;
+    color: #333;
+    font-size: 1rem;
+  }
+  .collapsible-section {
+    margin: 32px 0;
+    width: 100%;
+    border-radius: 8px;
+    background: #f7f7f7;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+  }
+  .collapsible-header {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 16px 18px;
+    background: #e6f0ff;
+    color: #007aff;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #e0e0e0;
+    outline: none;
+    transition: background 0.2s;
+  }
+  .collapsible-header.open {
+    background: #d0e7ff;
+  }
+  .collapsible-content {
+    display: none;
+    padding: 12px 18px 18px 18px;
+    color: #333;
+    font-size: 1rem;
+  }
+  .collapsible-content.open {
+    display: block;
+  }
   footer {
     background: #111;
     color: #fff;
     padding: 40px 0 24px 0;
-    border-radius: 16px 16px 0 0;
+    border-radius: 0;
     margin-top: 48px;
+    width: 100vw;
   }
   .footer-container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 18px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 32px;
@@ -106,7 +283,7 @@
   .footer-title {
     font-size: 1.3rem;
     font-weight: bold;
-    color: #ff9800;
+    color: #007aff;
   }
   .footer-links, .footer-support {
     list-style: none;
@@ -138,192 +315,174 @@
     margin-top: 8px;
   }
   .footer-socials a {
-    color: #bbb;
-    font-size: 1.2rem;
+    color: #1877f3;
+    font-size: 1.6rem;
     transition: color 0.2s;
+    background: #fff;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgb(24 119 243 / 0.08);
   }
   .footer-socials a:hover {
+    background: #1877f3;
     color: #fff;
   }
 </style>
 </head>
 <body>
-
 <div class="menu-bar">
   <div class="menu-logo">
     <img src="logo.svg" alt="Pitboard Logo" />
     <span style="font-weight:700;font-size:1.2rem;letter-spacing:0.01em;">Pitboard</span>
   </div>
-  <nav class="menu-links">
+  <nav class="menu-links" id="menuLinks">
     <a href="#how-to">How to Use</a>
     <a href="#faq">FAQ</a>
     <a href="#privacy">Privacy</a>
     <a href="#contact">Contact</a>
   </nav>
-</div>
-
-<div class="hero-banner-image" style="text-align: center; margin-bottom: 28px;">
-  <img src="hero-banner.svg" alt="Pitboard Hero Banner" style="max-width: 100%; border-radius: 14px; box-shadow: 0 4px 16px rgb(0 122 255 / 0.08);" />
-</div>
-
-<h1>Pitboard App Manual & Support</h1>
-<p>App Version: 1.0<!-- You can update this manually when you update the site --></p>
-
-<h2 id="how-to">How to Use Pitboard</h2>
-<p>This guide will help you get started quickly and effectively with Pitboard.</p>
-
-<div class="tile-container">
-  <div class="tile">
-    <div class="tile-icon">📱</div>
-    <h3>1. Mount Your Phone</h3>
-    <p class="caption">Use a sturdy, anti-shake metal or alloy phone holder mounted in landscape mode on your handlebars, centered on the bar pad.</p>
-  </div>
-  <div class="tile">
-    <div class="tile-icon">▶️</div>
-    <h3>2. Start Session</h3>
-    <p class="caption">Tap Start Session, wait for GPS lock, and ride! No further setup needed. A rolling start is recommended.</p>
-  </div>
-  <div class="tile">
-    <div class="tile-icon">⏱️</div>
-    <h3>3. Monitor Your Ride</h3>
-    <p class="caption">Track lap time, corner time, straight time, and more with live on-screen metrics.</p>
-  </div>
-  <div class="tile">
-    <div class="tile-icon">⏹️</div>
-    <h3>4. Stop Session</h3>
-    <p class="caption">Tap Stop Session when you're done. Your ride will be saved automatically for review.</p>
-  </div>
-  <div class="tile">
-    <div class="tile-icon">📊</div>
-    <h3>5. Analyze Your Ride</h3>
-    <p class="caption">Review saved sessions to see lap times, metrics, and track your performance.</p>
-  </div>
-  <div class="tile">
-    <div class="tile-icon">⚡</div>
-    <h3>6. Get Faster!</h3>
-    <p class="caption">Use insights and data to improve your technique and reduce lap times over time.</p>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
 
-<h2 id="faq">Frequently Asked Questions (FAQ)</h2>
-<div class="faq-search-bar">
-  <input type="text" id="faq-search" placeholder="Search FAQs..." oninput="filterFaqs()" />
+<div class="hero-banner-image">
+  <img src="hero-banner.svg" alt="Pitboard Hero Banner" />
 </div>
 
-<div id="faq-list">
-<details>
-  <summary>What does Pitboard do?</summary>
-  <p>Track your lap times, analyze corner and straight performance, and improve your riding with detailed metrics. Use session history to pinpoint areas for improvement.</p>
-</details>
+<div class="container">
+  <h1 id="how-to">How to Use Pitboard</h1>
+  <p>This guide will help you get started quickly and effectively with Pitboard.</p>
 
-<details>
-  <summary>Do I need special equipment to use the app?</summary>
-  <p>A sturdy phone mount is essential. We recommend an anti-shake alloy or metal handlebar holder. Mounting on yourself may reduce data accuracy.</p>
-</details>
+  <div class="tile-container">
+    <div class="tile">
+      <div class="tile-icon">📱</div>
+      <h3>1. Mount Your Phone</h3>
+      <p class="caption">Use a sturdy, anti-shake metal or alloy phone holder mounted in landscape mode on your handlebars, centered on the bar pad.</p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">▶️</div>
+      <h3>2. Start Session</h3>
+      <p class="caption">Tap Start Session, wait for GPS lock, and ride! No further setup needed. A rolling start is recommended.</p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">⏱️</div>
+      <h3>3. Monitor Your Ride</h3>
+      <p class="caption">Track lap time, corner time, straight time, and more with live on-screen metrics.</p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">⏹️</div>
+      <h3>4. Stop Session</h3>
+      <p class="caption">Tap Stop Session when you're done. Your ride will be saved automatically for review.</p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">📊</div>
+      <h3>5. Analyze Your Ride</h3>
+      <p class="caption">Review saved sessions to see lap times, metrics, and track your performance.</p>
+    </div>
+    <div class="tile">
+      <div class="tile-icon">⚡</div>
+      <h3>6. Get Faster!</h3>
+      <p class="caption">Use insights and data to improve your technique and reduce lap times over time.</p>
+    </div>
+  </div>
 
-<details>
-  <summary>Can I place my phone on myself instead of the bike?</summary>
-  <p>The phone needs to calibrate to the bike's lean axis, so mounting on the handlebars is best. Using a moon bag or tripper may cause inaccurate data.</p>
-</details>
+  <div class="faq-section">
+    <h2 id="faq">Frequently Asked Questions (FAQ)</h2>
+    <div class="faq-search-bar">
+      <input type="text" id="faq-search" placeholder="Search FAQs..." oninput="filterFaqs()" />
+    </div>
+    <div id="faq-list">
+      <details class="faq-accordion">
+        <summary>What does Pitboard do?</summary>
+        <p>Track your lap times, analyze corner and straight performance, and improve your riding with detailed metrics. Use session history to pinpoint areas for improvement.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Do I need special equipment to use the app?</summary>
+        <p>A sturdy phone mount is essential. We recommend an anti-shake alloy or metal handlebar holder. Mounting on yourself may reduce data accuracy.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Can I place my phone on myself instead of the bike?</summary>
+        <p>The phone needs to calibrate to the bike's lean axis, so mounting on the handlebars is best. Using a moon bag or tripper may cause inaccurate data.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>What metrics are tracked?</summary>
+        <ul>
+          <li>Total ride time</li>
+          <li>Number of laps</li>
+          <li>Current lap time</li>
+          <li>Corner time</li>
+          <li>Straight time</li>
+          <li>Average lap time</li>
+          <li>Average corner and straight times</li>
+        </ul>
+      </details>
+      <details class="faq-accordion">
+        <summary>How do I use Pitboard's data to get faster?</summary>
+        <p>Try to keep your current lap times at or below your average lap times to improve performance. Use the session history to monitor progress.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Does the app require internet?</summary>
+        <p>No, it uses your phone’s GPS and sensors. No internet connection is needed during sessions.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>How accurate is GPS tracking?</summary>
+        <p>Accuracy depends on signal strength and device quality. Ensure a clear sky view and wait for GPS lock before starting.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Why aren't my laps logging?</summary>
+        <p>Poor GPS signal can affect lap detection. Make sure you have a strong GPS signal (green icon) and wait for GPS lock.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Can I review previous sessions?</summary>
+        <p>Yes, all sessions are stored locally for review in the Session History tab.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>What happens if I fall mid-ride?</summary>
+        <p>The timers keep running. Fall detection is planned for future updates.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Can I export or share my data?</summary>
+        <p>This feature is coming soon.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Can I name my sessions?</summary>
+        <p>Yes, you can rename sessions after recording for easy identification.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Does the app work on all tracks?</summary>
+        <p>Yes, on any outdoor lap-based track with GPS coverage.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>How is a new lap detected?</summary>
+        <p>The app uses your start position and detects when you cross a 10-meter radius around it to log laps.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Can I use the app for enduro or trail riding?</summary>
+        <p>Yes, the app works best on closed-loop, lap-based tracks.</p>
+      </details>
+      <details class="faq-accordion">
+        <summary>Why is the app prematurely logging laps?</summary>
+        <p>Your track may be too tight. The lap detection radius is 10 meters; tight corners can cause early lap logs.</p>
+      </details>
+    </div>
+  </div>
 
-<details>
-  <summary>What metrics are tracked?</summary>
-  <ul>
-    <li>Total ride time</li>
-    <li>Number of laps</li>
-    <li>Current lap time</li>
-    <li>Corner time</li>
-    <li>Straight time</li>
-    <li>Average lap time</li>
-    <li>Average corner and straight times</li>
-  </ul>
-</details>
-
-<details>
-  <summary>How do I use Pitboard's data to get faster?</summary>
-  <p>Try to keep your current lap times at or below your average lap times to improve performance. Use the session history to monitor progress.</p>
-</details>
-
-<details>
-  <summary>Does the app require internet?</summary>
-  <p>No, it uses your phone’s GPS and sensors. No internet connection is needed during sessions.</p>
-</details>
-
-<details>
-  <summary>How accurate is GPS tracking?</summary>
-  <p>Accuracy depends on signal strength and device quality. Ensure a clear sky view and wait for GPS lock before starting.</p>
-</details>
-
-<details>
-  <summary>Why aren't my laps logging?</summary>
-  <p>Poor GPS signal can affect lap detection. Make sure you have a strong GPS signal (green icon) and wait for GPS lock.</p>
-</details>
-
-<details>
-  <summary>Can I review previous sessions?</summary>
-  <p>Yes, all sessions are stored locally for review in the Session History tab.</p>
-</details>
-
-<details>
-  <summary>What happens if I fall mid-ride?</summary>
-  <p>The timers keep running. Fall detection is planned for future updates.</p>
-</details>
-
-<details>
-  <summary>Can I export or share my data?</summary>
-  <p>This feature is coming soon.</p>
-</details>
-
-<details>
-  <summary>Can I name my sessions?</summary>
-  <p>Yes, you can rename sessions after recording for easy identification.</p>
-</details>
-
-<details>
-  <summary>Does the app work on all tracks?</summary>
-  <p>Yes, on any outdoor lap-based track with GPS coverage.</p>
-</details>
-
-<details>
-  <summary>How is a new lap detected?</summary>
-  <p>The app uses your start position and detects when you cross a 10-meter radius around it to log laps.</p>
-</details>
-
-<details>
-  <summary>Can I use the app for enduro or trail riding?</summary>
-  <p>Yes, the app works best on closed-loop, lap-based tracks.</p>
-</details>
-
-<details>
-  <summary>Why is the app prematurely logging laps?</summary>
-  <p>Your track may be too tight. The lap detection radius is 10 meters; tight corners can cause early lap logs.</p>
-</details>
+  <div class="collapsible-section" id="privacy-section">
+    <div class="collapsible-header" onclick="toggleCollapsible('privacy')">Privacy Policy</div>
+    <div class="collapsible-content" id="privacy-content">
+      <p>Pitboard respects your privacy. The app does <strong>not collect, store, or share any personal data</strong> beyond what is necessary for its core functionality.</p>
+      <p><strong>GPS Permission:</strong> The app requests access to your device’s GPS solely to track your location during rides for lap timing and performance metrics. This data is processed locally on your device and is <strong>never transmitted or stored externally</strong>.</p>
+      <p>No internet connection is required for the app to function, and no personal data leaves your device unless you choose to share it manually.</p>
+      <p>For questions or concerns about your privacy, please <a href="mailto:ke-walden@outlook.com">contact us</a>.</p>
+    </div>
+  </div>
 </div>
-
-<script>
-function filterFaqs() {
-  const input = document.getElementById('faq-search').value.toLowerCase();
-  const faqs = document.querySelectorAll('#faq-list details');
-  faqs.forEach(faq => {
-    const text = faq.textContent.toLowerCase();
-    faq.style.display = text.includes(input) ? '' : 'none';
-  });
-}
-</script>
-
-<h2 id="privacy">Privacy Policy</h2>
-  <p>
-    Pitboard respects your privacy. The app does <strong>not collect, store, or share any personal data</strong> beyond what is necessary for its core functionality.
-  </p>
-  <p>
-    <strong>GPS Permission:</strong> The app requests access to your device’s GPS solely to track your location during rides for lap timing and performance metrics. This data is processed locally on your device and is <strong>never transmitted or stored externally</strong>.
-  </p>
-  <p>
-    No internet connection is required for the app to function, and no personal data leaves your device unless you choose to share it manually.
-  </p>
-  <p>
-    For questions or concerns about your privacy, please <a href="mailto:ke-walden@outlook.com">contact us</a>.
-  </p>
 
 <footer id="contact">
   <div class="footer-container">
@@ -332,17 +491,19 @@ function filterFaqs() {
         <img src="logo.svg" alt="Pitboard Logo" />
         <span class="footer-title">Pitboard</span>
       </div>
-      <p class="text-gray-400 mb-6" style="color:#bbb;max-width:320px;">The ultimate motocross lap timer for iOS. Track your performance, analyze your rides, and dominate the track.</p>
+      <p style="color:#bbb;max-width:320px;">The ultimate motocross lap timer for iOS. Track your performance, analyze your rides, and dominate the track.</p>
       <div class="footer-socials">
-        <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.59-2.47.7a4.3 4.3 0 0 0 1.88-2.37 8.59 8.59 0 0 1-2.72 1.04A4.28 4.28 0 0 0 16.11 4c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.11.99C7.69 9.13 4.07 7.38 1.64 4.7c-.37.64-.58 1.38-.58 2.17 0 1.5.76 2.82 1.92 3.6-.71-.02-1.38-.22-1.97-.54v.05c0 2.1 1.5 3.85 3.5 4.25-.36.1-.74.16-1.13.16-.28 0-.54-.03-.8-.08.54 1.7 2.1 2.94 3.95 2.97A8.6 8.6 0 0 1 2 19.54c-.29 0-.57-.02-.85-.05A12.13 12.13 0 0 0 8.29 21.5c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.54A8.18 8.18 0 0 0 24 4.59a8.36 8.36 0 0 1-2.54.7z"/></svg></a>
-        <a href="https://github.com/" target="_blank" aria-label="Github"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.2 9.2 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg></a>
-        <a href="mailto:ke-walden@outlook.com" aria-label="Mail"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 20v-9.99l7.99 7.99c.39.39 1.02.39 1.41 0L20 10.01V20H4z"/></svg></a>
+        <a href="https://facebook.com/yourpage" target="_blank" aria-label="Facebook Page">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg>
+        </a>
+        <a href="https://facebook.com/groups/yourcommunity" target="_blank" aria-label="Facebook Community">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg>
+        </a>
       </div>
     </div>
     <div>
       <h3 style="font-weight:600;margin-bottom:12px;">Quick Links</h3>
       <ul class="footer-links">
-        <li><a href="#features">Features</a></li>
         <li><a href="#how-to">How to Use</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#privacy">Privacy</a></li>
@@ -351,10 +512,7 @@ function filterFaqs() {
     <div>
       <h3 style="font-weight:600;margin-bottom:12px;">Support</h3>
       <ul class="footer-support">
-        <li><a href="mailto:ke-walden@outlook.com">Contact Support</a></li>
-        <li><a href="#">User Guide</a></li>
-        <li><a href="#">System Requirements</a></li>
-        <li><a href="#">Updates</a></li>
+        <li><a href="https://facebook.com/groups/yourcommunity" target="_blank">Riders Lounge</a></li>
       </ul>
     </div>
   </div>
@@ -362,6 +520,33 @@ function filterFaqs() {
     <p>&copy; 2025 Pitboard. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+function toggleMenu() {
+  var menu = document.getElementById('menuLinks');
+  menu.classList.toggle('open');
+}
+function filterFaqs() {
+  const input = document.getElementById('faq-search').value.toLowerCase();
+  const faqs = document.querySelectorAll('#faq-list details');
+  faqs.forEach(faq => {
+    const text = faq.textContent.toLowerCase();
+    faq.style.display = text.includes(input) ? '' : 'none';
+  });
+}
+function toggleCollapsible(section) {
+  var content = document.getElementById(section + '-content');
+  var header = document.querySelector('#' + section + '-section .collapsible-header');
+  if (content.classList.contains('open')) {
+    content.classList.remove('open');
+    header.classList.remove('open');
+  } else {
+    content.classList.add('open');
+    header.classList.add('open');
+  }
+}
+// Expand FAQ accordions on click (native <details> used)
+</script>
 
 </body>
 </html>
